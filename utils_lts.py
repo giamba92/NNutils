@@ -72,9 +72,9 @@ def train_model(model, train_params, train_data, val_data=(), data_obj=None):
 
 
 def plot_and_save(val_loss, train_loss, val_acc_list, train_params):
-	''' 
-	plot and save losses and accuracies
-	'''
+    '''
+    plot and save losses and accuracies
+    '''
     import matplotlib.pyplot as plt
     plt.figure(5, figsize=(16, 10))
     if train_params.plt_ion:
@@ -98,9 +98,9 @@ def plot_and_save(val_loss, train_loss, val_acc_list, train_params):
 #-------------------------------------------
 
 def return_activated_layers_list(model):
-	''' 
-	returns a list of layers with meaningful activations to be studied
-	'''
+    '''
+    returns a list of layers with meaningful activations to be studied
+    '''
     my_activ_layers = np.array(['my_act_funcs' in str(x) for x in model.layers])
     activation_layers = np.array(['Act' in str(x) for x in model.layers])
     conv_layers = np.array(['Conv' in str(x) for x in model.layers])
@@ -159,8 +159,8 @@ def check_activations(model, data, ptc=1, return_acts=False, get_activation_func
 
 
 def hist_plot_activations(model, X, layer=0):
-	'''
-	plot histogram of the activations against the sinusoid function, needed for the paper "Taming the waves"
+    '''
+    plot histogram of the activations against the sinusoid function, needed for the paper "Taming the waves"
     '''
 
     layers = return_activated_layers_list(model)
@@ -217,9 +217,9 @@ def eval_network_between_configs(model, mod1_w, mod2_w, alpha=0.05, min_alpha=-1
 #-------------------------------------------
 
 def stack_3D_activ_to_list2D(A):
-	'''
-	converts 3D activations to a list of 2D activations 
-	'''
+    '''
+    converts 3D activations to a list of 2D activations 
+    '''
     B = []
     for i in range(A.shape[1]):
         B.append(A[:,i,:])
@@ -227,9 +227,9 @@ def stack_3D_activ_to_list2D(A):
 
 
 def plot_all_elems_in_list(l):
-	'''
-	plots in separate plots all the elements in a list 
-	'''
+    '''
+    plots in separate plots all the elements in a list 
+    '''
     import matplotlib.pyplot as plt
     plt.figure(figsize=(16.0, 10.0))
     # max number of columns in the figure
@@ -306,9 +306,9 @@ def sort_column_by_max(A):
 
 
 def binarize_array(a, digits):
-	'''
-	converts a 2D array of integers to a 3D binary array with the binary representation of each entry
-	'''
+    '''
+    converts a 2D array of integers to a 3D binary array with the binary representation of each entry
+    '''
     new_array = []
     for k in range(a.shape[0]):
         new_array.append((((a[k,:, None] & (1 << np.arange(digits)))) > 0).astype(int))
@@ -316,9 +316,9 @@ def binarize_array(a, digits):
 
 
 def mk_dir(dir):
-	'''
-	creates a directory if it doesn't exist
-	'''
+    '''
+    creates a directory if it doesn't exist
+    '''
     import os
     # check if the dir already exists
     try:
@@ -333,10 +333,10 @@ def mk_dir(dir):
 #-------------------------------------------
 
 def score_exact(classif, X, Y, threshold=0.5, arg_max=0):
-	'''
-	compute the accuracy for perfect recognition for a given classifier
-	works with both multiclass and multilabel data
-	'''
+    '''
+    compute the accuracy for perfect recognition for a given classifier
+    works with both multiclass and multilabel data
+    '''
     O = classif.predict(X)
     if type(O) is list: O = O[0]
     if O.ndim == 3:
@@ -357,9 +357,9 @@ def score_exact(classif, X, Y, threshold=0.5, arg_max=0):
 
 
 def score_rnn_encode_task(model, X, Y):
-	'''
-	scores encoder rnn task
-	'''
+    '''
+    scores encoder rnn task
+    '''
     p = model.predict_classes(X)
     #p = model.predict(X)
     #p = np.argmax(p, axis=2)
